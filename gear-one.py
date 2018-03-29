@@ -8,7 +8,7 @@ import json
 import os
 
 
-token = os.environ.get('TOKEN')
+token = str(os.environ.get('TOKEN'))
 bot = commands.Bot(command_prefix = '-')
 
 @bot.event
