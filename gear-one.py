@@ -20,4 +20,4 @@ async def on_ready():
 async def hallo(ctx):
     await bot.say("Hallo back.")
 
-bot.run("token")
+bot.run(token)
