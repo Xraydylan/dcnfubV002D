@@ -1,1 +1,1 @@
-worker: python gear-one.py
+worker: python main.py
