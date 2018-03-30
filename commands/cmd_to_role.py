@@ -8,9 +8,6 @@ async def ex(args, message, client, invoke):
     args_out = ""
     if len(args) > 0:
         args_out = args.__str__()[1:-1].replace("'", "").replace(",", "")
-        if args_out == "Spoiler Squad":
-            await assign_role(args_out, message, client, message.channel, message.author)
-
         if args_out == "RPG-Player":
             await assign_role(args_out, message, client, message.channel, message.author)
 
