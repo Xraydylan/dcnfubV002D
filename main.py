@@ -2,7 +2,7 @@ import discord
 from discord import Game, Embed
 
 import CONECT
-from commands import cmd_ping, cmd_hello, cmd_autorole, cmd_NSFWauthorise, cmd_to_role
+from commands import cmd_ping, cmd_hello, cmd_autorole, cmd_NSFWauthorise, cmd_to_role, cmd_help
 import STATICS
 
 client = discord.Client()
@@ -16,16 +16,16 @@ commands = {
     "Im": cmd_NSFWauthorise,
     "To": cmd_to_role,
     "to": cmd_to_role,
+    "help": cmd_help
 
 }
-
 
 @client.event
 async def on_ready():
     print("Bot is logged in successfully. Running on servers:\n")
     for s in client.servers:
         print("  - %s (%s)" % (s.name, s.id))
-    await client.change_presence(game=Game(name="This is just for tutorial purposes!"))
+    await client.change_presence(game=Game(name="Ready to help"))
 
 
 @client.event
@@ -47,8 +47,6 @@ async def on_member_join(member):
         await client.add_roles(member, role)
         custome_first_promote="Congratulations!! \n\nYou have been promoted!! \n\nYou are now a part of the %s!!" % role.name
         await client.send_message(member,embed=Embed(color=discord.Color.green(), description=custome_first_promote))
-
-
 
 
 
