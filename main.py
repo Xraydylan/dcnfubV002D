@@ -6,6 +6,7 @@ from commands import cmd_ping, cmd_hello, cmd_autorole, cmd_NSFWauthorise, cmd_t
 import STATICS
 
 client = discord.Client()
+n_server = None
 
 commands = {
 
@@ -22,19 +23,24 @@ commands = {
 
 @client.event
 async def on_ready():
+    global n_server
     print("Bot is logged in successfully. Running on servers:\n")
     for s in client.servers:
         print("  - %s (%s)" % (s.name, s.id))
+        if str(s.id) == "405491215870459914":
+            n_server = s
+            print (n_server.name)
     await client.change_presence(game=Game(name="Ready to help"))
 
 
 @client.event
 async def on_message(message):
+    global n_server
     if message.content.startswith(STATICS.PREFIX):
         invoke = message.content[len(STATICS.PREFIX):].split(" ")[0]
         args = message.content.split(" ")[1:]
         if commands.__contains__(invoke):
-            await commands.get(invoke).ex(args, message, client, invoke)
+            await commands.get(invoke).ex(args, message, client, invoke, n_server)
         else:
             await client.send_message(message.channel, embed=Embed(color=discord.Color.red(), description=("The command `%s` is not valid!" % invoke)))
 
