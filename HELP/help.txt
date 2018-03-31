@@ -20,4 +20,4 @@ Adds role "Im A Big Boy"
 Adds role "Im A Big Girl"
 
 -to RPG-Player
-Adds role "RPG-Player" (Please ask the RPG-Master in the RPG-Section *before*)
+Adds role "RPG-Player" (Please ask the RPG-Master in the RPG-Section **before**)
