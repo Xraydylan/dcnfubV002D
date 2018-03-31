@@ -25,20 +25,20 @@ def saveFile(id, server):
         f.close()
 
 
-async def ex(args, message, client, invoke):
+async def ex(args, message, client, invoke, server):
 
-    rolea = discord.utils.get(message.server.roles, name="The One and Only")
-    roleb = discord.utils.get(message.server.roles, name="Bot Master")
+    rolea = discord.utils.get(server.roles, name="The One and Only")
+    roleb = discord.utils.get(server.roles, name="Bot Master")
     if (rolea in message.author.roles) or (roleb in message.author.roles):
         print("permission")
         if len(args) > 0:
             rolename = args.__str__()[1:-1].replace(",", "").replace("'", "")
-            role = discord.utils.get(message.server.roles, name=rolename)
+            role = discord.utils.get(server.roles, name=rolename)
             if role == None:
                 await error("Please enter a valid role existing on this server!", message.channel, client)
             else:
                 try:
-                    saveFile(role.id, message.server)
+                    saveFile(role.id, server)
                     await client.send_message(message.channel, embed=discord.Embed(color=discord.Color.green(), description=("Successfully set autorole to role `%s`" % role.name)))
                 except Exception:
                     await error("Something went wrong while saving autorole!", message.channel, client)
