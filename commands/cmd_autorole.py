@@ -2,11 +2,7 @@ import os
 from os import path
 
 import discord
-
-
-async def error(content, channel, client):
-    await client.send_message(channel, embed=discord.Embed(color=discord.Color.red(), description=content))
-
+from use import use
 
 def get(server):
     f = "SETTINGS/" + server.id + "/autorole"
@@ -35,13 +31,13 @@ async def ex(args, message, client, invoke, server):
             rolename = args.__str__()[1:-1].replace(",", "").replace("'", "")
             role = discord.utils.get(server.roles, name=rolename)
             if role == None:
-                await error("Please enter a valid role existing on this server!", message.channel, client)
+                await use.error("Please enter a valid role existing on this server!", message.channel, client)
             else:
                 try:
                     saveFile(role.id, server)
                     await client.send_message(message.channel, embed=discord.Embed(color=discord.Color.green(), description=("Successfully set autorole to role `%s`" % role.name)))
                 except Exception:
-                    await error("Something went wrong while saving autorole!", message.channel, client)
+                    await use.error("Something went wrong while saving autorole!", message.channel, client)
                     raise Exception
     else:
-        await error("You don´t have the right permission to do this.\nYou need role %s or %s to do this" % (rolea.mention, roleb.mention), message.channel, client)
+        await use.error("You don´t have the right permission to do this.\nYou need role %s or %s to do this" % (rolea.mention, roleb.mention), message.channel, client)

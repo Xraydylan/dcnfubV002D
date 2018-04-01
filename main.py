@@ -1,8 +1,8 @@
 import discord
 from discord import Game, Embed
-
+from os import path
 import CONECT
-from commands import cmd_ping, cmd_hello, cmd_autorole, cmd_NSFWauthorise, cmd_to_role, cmd_help
+from commands import cmd_ping, cmd_hello, cmd_autorole, cmd_NSFWauthorise, cmd_to_role, cmd_help, cmd_server
 import STATICS
 
 client = discord.Client()
@@ -17,7 +17,8 @@ commands = {
     "Im": cmd_NSFWauthorise,
     "To": cmd_to_role,
     "to": cmd_to_role,
-    "help": cmd_help
+    "help": cmd_help,
+    "member": cmd_server
 
 }
 
@@ -27,9 +28,11 @@ async def on_ready():
     print("Bot is logged in successfully. Running on servers:\n")
     for s in client.servers:
         print("  - %s (%s)" % (s.name, s.id))
-        if str(s.id) == "405491215870459914":
+        if str(s.id) == CONECT.SERVER_ID:
             n_server = s
-            print (n_server.name)
+            print(n_server.name)
+    if n_server == None:
+        print("No matching server found!")
     await client.change_presence(game=Game(name="Ready to help"))
 
 
@@ -46,14 +49,15 @@ async def on_message(message):
 
 @client.event
 async def on_member_join(member):
-    custome_welcome = "Hey there!\nThis is Nerfy\nWelcome to my own Server!\nFeel free to check out all the chats and of course share whatever you wanna share <3\nThx so much for your support! As another Member of the #NerfyArmy you basically joined a small Family here :heart: I Hope you enjoy yout Time here !\nFor now\nSee ya and peace OUT! /)"
-    await client.send_message(member, embed=Embed(color=discord.Color.orange(), description=custome_welcome))
+    f = "FILES/" + "join_message.txt"
+    if path.isfile(f):
+        with open(f) as f:
+            custome_welcome = f.read()
+        await client.send_message(member, embed=Embed(color=discord.Color.orange(), description=custome_welcome))
     role = cmd_autorole.get(member.server)
     if not role == None:
         await client.add_roles(member, role)
         custome_first_promote="Congratulations!! \n\nYou have been promoted!! \n\nYou are now a part of the %s!!" % role.name
         await client.send_message(member,embed=Embed(color=discord.Color.green(), description=custome_first_promote))
-
-
 
 client.run(CONECT.TOKEN)
