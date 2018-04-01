@@ -21,3 +21,8 @@ Adds role "Im A Big Girl"
 
 -to RPG-Player
 Adds role "RPG-Player" (Please ask the RPG-Master (%s) in the RPG-Section *before*)
+
+**Server Info:**
+
+-server member count
+Displays how many members the server currently has.

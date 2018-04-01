@@ -19,7 +19,7 @@ commands = {
     "To": cmd_to_role,
     "to": cmd_to_role,
     "help": cmd_help,
-    "member": cmd_server
+    "server": cmd_server
 
 }
 
