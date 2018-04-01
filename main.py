@@ -4,6 +4,7 @@ from os import path
 import CONECT
 from commands import cmd_ping, cmd_hello, cmd_autorole, cmd_NSFWauthorise, cmd_to_role, cmd_help, cmd_server
 import STATICS
+from use import use,get
 
 client = discord.Client()
 n_server = None
@@ -45,7 +46,7 @@ async def on_message(message):
         if commands.__contains__(invoke):
             await commands.get(invoke).ex(args, message, client, invoke, n_server)
         else:
-            await client.send_message(message.channel, embed=Embed(color=discord.Color.red(), description=("The command `%s` is not valid!" % invoke)))
+            await use.error(("The command `%s` is not valid!" % invoke), message.channel, client)
 
 @client.event
 async def on_member_join(member):
