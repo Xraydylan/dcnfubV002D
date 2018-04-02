@@ -1,0 +1,3 @@
+Do not forget to check out the rules.
+If you have any questions about how the bot works, type in:
+-help

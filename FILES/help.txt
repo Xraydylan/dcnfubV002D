@@ -1,4 +1,5 @@
-Here are all available commands.
+Here are all available commands. Type them directly into this chat or in any server chat, in which this bot is online.
+But please do not spam.
 
 **Help:**
 -help
@@ -24,6 +25,8 @@ Adds role "RPG-Player" (Please ask the RPG-Master (%s) in the RPG-Section *befor
 
 
 **Server Info:**
-
 -server member count
 Displays how many members the server currently has.
+
+-server roles
+Displays all roles (alphabetically).

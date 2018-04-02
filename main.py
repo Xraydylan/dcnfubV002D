@@ -55,6 +55,12 @@ async def on_member_join(member):
         with open(f) as f:
             custome_welcome = f.read()
         await client.send_message(member, embed=Embed(color=discord.Color.orange(), description=custome_welcome))
+    f = "FILES/" + "additional_join_info.txt"
+    if path.isfile(f):
+        with open(f) as f:
+            custome_welcome = f.read()
+        await client.send_message(member, embed=Embed(color=discord.Color.blue(), description=custome_welcome))
+
     role = cmd_autorole.get(member.server)
     if not role == None:
         await client.add_roles(member, role)
