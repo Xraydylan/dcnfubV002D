@@ -15,10 +15,10 @@ Bot greets you back
 
 **Add roles:**
 -Im A Big Boy
-Adds role "Im A Big Boy"
+Adds role "Im A Big Boy" (for NSFW content)
 
 -Im A Big Girl
-Adds role "Im A Big Girl"
+Adds role "Im A Big Girl" (for NSFW content)
 
 -to RPG-Player
 Adds role "RPG-Player" (Please ask the RPG-Master (%s) in the RPG-Section *before*)
