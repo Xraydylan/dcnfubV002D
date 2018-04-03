@@ -46,7 +46,7 @@ async def on_message(message):
         args = message.content.split(" ")[1:]
         if commands.__contains__(invoke):
             await commands.get(invoke).ex(args, message, client, invoke, n_server)
-        else:
+        elif invoke != "new":
             await use.error(("The command `%s` is not valid!" % invoke), message.channel, client)
 
 @client.event
