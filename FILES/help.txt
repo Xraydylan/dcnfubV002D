@@ -30,3 +30,7 @@ Displays how many members the server currently has.
 
 -server roles
 Displays all roles (alphabetically).
+
+
+
+If you have any questions about the bot or any suggestions please contact the Bot Master (%s).
