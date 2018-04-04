@@ -33,4 +33,4 @@ Displays all roles (alphabetically).
 
 
 
-If you have any questions about the bot or any suggestions please contact the Bot Master (%s).
+If you have any questions about the bot or any suggestions, please contact the Bot Master (%s).
