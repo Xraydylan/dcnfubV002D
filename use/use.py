@@ -1,5 +1,7 @@
 import discord
 from discord import Game, Embed
+import os
+from os import path
 
 async def error(content, channel, client):
     await client.send_message(channel, embed=Embed(color=discord.Color.red(), description=content))
@@ -17,3 +19,18 @@ async def assign_role(rolename, message, client, channel, member, server):
             await client.send_message(member, embed=discord.Embed(color=discord.Color.green(), description="Congratulations for your new role. \nYou are now part of: \n%s!" % role.name))
             return True
     return None
+
+async def dev_authorisation(client, server, member):
+    if path.isfile("SETTINGS/" + server.id + "/permission.txt"):
+        with open("SETTINGS/" + server.id + "/permission.txt") as f:
+            content = f.readlines()
+            content = [x.strip() for x in content]
+            f.close()
+        for x in member.roles:
+            if x.name in content:
+                return True
+
+    return False
+
+
+

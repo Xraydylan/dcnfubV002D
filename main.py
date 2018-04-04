@@ -2,7 +2,7 @@ import discord
 from discord import Game, Embed
 from os import path
 import CONECT
-from commands import cmd_ping, cmd_hello, cmd_autorole, cmd_NSFWauthorise, cmd_to_role, cmd_help, cmd_server, debug
+from commands import cmd_ping, cmd_hello, cmd_autorole, cmd_NSFWauthorise, cmd_to_role, cmd_help, cmd_server, cmd_dev
 import STATICS
 from use import use,get
 
@@ -20,7 +20,7 @@ commands = {
     "to": cmd_to_role,
     "help": cmd_help,
     "server": cmd_server,
-    "debug": debug
+    "dev": cmd_dev
 
 }
 
