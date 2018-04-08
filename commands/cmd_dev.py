@@ -49,6 +49,11 @@ async def ex(args, message, client, invoke, server):
                 elif args_out == "channel id":
                     print (message.channel.id)
 
+                elif args_out == "send":
+                    channel = client.get_channel("429051026251841536")
+                    path100 = "data/100.jpg"
+                    await client.send_file(channel, path100)
+
                 # Special args
                 args_out_list = args_out.split(" ")
                 if len(args_out_list) >= 1:

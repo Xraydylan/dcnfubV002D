@@ -1,3 +1,6 @@
+You are currently the member number %s on the server!!!
+(Not taking the people into consideration, who sadly left us...)
+
 Do not forget to check out the rules.
 If you have any questions about how the bot works, type in:
 -help

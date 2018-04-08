@@ -2,7 +2,7 @@ import discord
 from discord import Game, Embed
 from os import path
 import CONECT
-from commands import cmd_ping, cmd_hello, cmd_autorole, cmd_NSFWauthorise, cmd_to_role, cmd_help, cmd_server, cmd_dev, anti_spam
+from commands import cmd_ping, cmd_hello, cmd_autorole, cmd_NSFWauthorise, cmd_to_role, cmd_help, cmd_server, cmd_dev, anti_spam, special_member_count
 import STATICS
 from use import use,get
 import threading
@@ -58,6 +58,7 @@ async def on_message(message):
 
 @client.event
 async def on_member_join(member):
+    global n_server
     f = "FILES/" + "join_message.txt"
     if path.isfile(f):
         with open(f) as f:
@@ -66,7 +67,8 @@ async def on_member_join(member):
     f = "FILES/" + "additional_join_info.txt"
     if path.isfile(f):
         with open(f) as f:
-            custome_welcome = f.read()
+            custome_welcome_pre = f.read()
+            custome_welcome = custome_welcome_pre % n_server.member_count
         await client.send_message(member, embed=Embed(color=discord.Color.blue(), description=custome_welcome))
 
     role = cmd_autorole.get(member.server)
@@ -74,5 +76,7 @@ async def on_member_join(member):
         await client.add_roles(member, role)
         custome_first_promote="Congratulations!! \n\nYou have been promoted!! \n\nYou are now a part of the %s!!" % role.name
         await client.send_message(member,embed=Embed(color=discord.Color.green(), description=custome_first_promote))
+
+    await special_member_count.check_count(client, n_server, member)
 
 client.run(CONECT.TOKEN)
