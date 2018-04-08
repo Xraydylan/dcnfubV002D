@@ -47,42 +47,46 @@ async def new_message(client,message, server):
     user = message.author
     channel_id = message.channel.id
 
-    if channel_id in sent_dict:
-        if sent_dict[channel_id][0] == user and user != client.user:
-            counter = sent_dict[channel_id][1]+1
-            status_c = sent_dict[channel_id][2]
-            status_t = sent_dict[channel_id][3]
+
+    # Spambot not active in Test Channel!!!!!!
+    if str(channel_id) != "429051026251841536":
+
+        if channel_id in sent_dict:
+            if sent_dict[channel_id][0] == user and user != client.user:
+                counter = sent_dict[channel_id][1]+1
+                status_c = sent_dict[channel_id][2]
+                status_t = sent_dict[channel_id][3]
 
 
 
-            if counter >= 2 and status_t == 0:
-                status_t = 1
-                observe_dict[(channel_id, user)] = 0
+                if counter >= 2 and status_t == 0:
+                    status_t = 1
+                    observe_dict[(channel_id, user)] = 0
 
-                threading.Thread(name='loop', target=loop, args=(client ,channel_id, user)).start()
+                    threading.Thread(name='loop', target=loop, args=(client ,channel_id, user)).start()
 
-            if status_t == 1 or status_t == 2:
-                temp = observe_dict[(channel_id, user)] + 1
-                observe_dict[(channel_id, user)] = temp
-
-
-            if counter >= 10 and status_c == 0:
-                status_c = 1
-                spam_alert(client, channel_id, user)
-
-            elif counter >= 20 and status_c == 1:
-                status_c = 2
-                spam_alert2(client, channel_id, user)
+                if status_t == 1 or status_t == 2:
+                    temp = observe_dict[(channel_id, user)] + 1
+                    observe_dict[(channel_id, user)] = temp
 
 
-            sent_dict[channel_id] = (user, counter, status_c, status_t)
-            print(counter)
+                if counter >= 10 and status_c == 0:
+                    status_c = 1
+                    spam_alert(client, channel_id, user)
 
+                elif counter >= 20 and status_c == 1:
+                    status_c = 2
+                    spam_alert2(client, channel_id, user)
+
+
+                sent_dict[channel_id] = (user, counter, status_c, status_t)
+                #print(counter)
+
+            else:
+                st = sent_dict[channel_id][3]
+                sent_dict[channel_id] = (user, 1, 0, st)
         else:
-            st = sent_dict[channel_id][3]
-            sent_dict[channel_id] = (user, 1, 0, st)
-    else:
-        sent_dict[channel_id] = (user, 1, 0, 0)
+            sent_dict[channel_id] = (user, 1, 0, 0)
 
 
 def loop(client, channel_id, user):

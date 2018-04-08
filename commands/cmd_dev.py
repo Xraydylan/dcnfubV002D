@@ -46,6 +46,8 @@ async def ex(args, message, client, invoke, server):
                     await client.send_message(message.channel, "dev Pong!")
                 elif args_out == "pull authorisation type1":
                     await pull_authorisation_type1(client, server, message.channel)
+                elif args_out == "channel id":
+                    print (message.channel.id)
 
                 # Special args
                 args_out_list = args_out.split(" ")
@@ -55,8 +57,6 @@ async def ex(args, message, client, invoke, server):
                         if args_out_list[0] == "add" and args_out_list[1] == "auth2":
                             print(args_out_list[2][2:len(args_out_list[2])-1])
                             await add_new_auth2(client, server, message.channel, args_out_list[2][2:len(args_out_list[2])-1])
-
-                            #args_out.split(" ")[1][2:len(args_out.split(" ")[1])-1]
 
 
 
