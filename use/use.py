@@ -20,17 +20,25 @@ async def assign_role(rolename, message, client, channel, member, server):
             return True
     return None
 
-async def dev_authorisation(client, server, member):
-    if path.isfile("SETTINGS/" + server.id + "/permission.txt"):
-        with open("SETTINGS/" + server.id + "/permission.txt") as f:
+async def dev_authorisation_type1(server, member):
+    if path.isfile("SETTINGS/" + server.id + "/permission_type1.txt"):
+        with open("SETTINGS/" + server.id + "/permission_type1.txt") as f:
             content = f.readlines()
             content = [x.strip() for x in content]
             f.close()
         for x in member.roles:
             if x.name in content:
                 return True
-
     return False
 
-
+async def dev_authorisation_type2(server, member):
+    if path.isfile("SETTINGS/" + server.id + "/permission_type2.txt"):
+        with open("SETTINGS/" + server.id + "/permission_type2.txt") as f:
+            content = f.readlines()
+            content = [x.strip() for x in content]
+            f.close()
+        for x in server.members:
+            if (x.id in content) and (member.id in content):
+                return True
+    return False
 

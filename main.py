@@ -2,9 +2,10 @@ import discord
 from discord import Game, Embed
 from os import path
 import CONECT
-from commands import cmd_ping, cmd_hello, cmd_autorole, cmd_NSFWauthorise, cmd_to_role, cmd_help, cmd_server, cmd_dev
+from commands import cmd_ping, cmd_hello, cmd_autorole, cmd_NSFWauthorise, cmd_to_role, cmd_help, cmd_server, cmd_dev, anti_spam
 import STATICS
 from use import use,get
+import threading
 
 client = discord.Client()
 n_server = None
@@ -41,11 +42,17 @@ async def on_ready():
 @client.event
 async def on_message(message):
     global n_server
+    if anti_spam.status == 1:
+        if message.server != None:
+            await anti_spam.new_message(client, message, n_server)
+            #if message.author == client.user
+
     if message.content.startswith(STATICS.PREFIX):
         invoke = message.content[len(STATICS.PREFIX):].split(" ")[0]
         args = message.content.split(" ")[1:]
         if commands.__contains__(invoke):
             await commands.get(invoke).ex(args, message, client, invoke, n_server)
+
         elif invoke != "new":
             await use.error(("The command `%s` is not valid!" % invoke), message.channel, client)
 
