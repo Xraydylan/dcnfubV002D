@@ -28,7 +28,6 @@ async def start_anti_spam(client, server, channel):
     if status == 0:
         await client.send_message(channel, "Starting Antispam.")
         status = 1
-
     else:
         await client.send_message(channel, "Antispam is already on.")
 

@@ -2,6 +2,9 @@ import discord
 from discord import Game, Embed
 import os
 from os import path
+import CONECT
+import dropbox
+from dropbox.files import WriteMode
 
 async def error(content, channel, client):
     await client.send_message(channel, embed=Embed(color=discord.Color.red(), description=content))
@@ -42,3 +45,18 @@ async def dev_authorisation_type2(server, member):
                 return True
     return False
 
+
+def drop_up(drop_path, file_path):
+    dbx = dropbox.Dropbox(CONECT.DROP_TOKEN)
+    up = open(file_path, 'rb')
+    dbx.files_upload(up.read(), drop_path, mode=WriteMode.overwrite)
+
+
+
+def drop_down(drop_path, file_path):
+    dbx = dropbox.Dropbox(CONECT.DROP_TOKEN)
+
+    metadata, f = dbx.files_download(drop_path)
+    out = open(file_path, 'wb')
+    out.write(f.content)
+    out.close()
