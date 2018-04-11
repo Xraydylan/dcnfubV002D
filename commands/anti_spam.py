@@ -168,15 +168,16 @@ async def init_antispam_status(server):
 
     try:
         use.drop_down(drop_path,file_path)
+        with open(file_path) as f:
+            content = f.readlines()
+            content = [x.strip() for x in content]
+            f.close()
+
+        status = int(content[0])
     except:
         print("No file uploaded! (antispam_status.txt)")
 
-    with open(file_path) as f:
-        content = f.readlines()
-        content = [x.strip() for x in content]
-        f.close()
 
-    status = int(content[0])
 
 def set_antispam_status(num, server):
     file_path = "SETTINGS/" + server.id + "/antispam_status.txt"
