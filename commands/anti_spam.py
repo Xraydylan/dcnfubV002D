@@ -28,6 +28,7 @@ async def start_anti_spam(client, server, channel):
     if status == 0:
         await client.send_message(channel, "Starting Antispam.")
         status = 1
+        set_antispam_status(1, server)
     else:
         await client.send_message(channel, "Antispam is already on.")
 
@@ -38,6 +39,7 @@ async def stop_anti_spam(client, server, channel):
     else:
         await client.send_message(channel, "Stopping Antispam.")
         status = 0
+        set_antispam_status(0, server)
 
 
 async def new_message(client,message, server):
@@ -158,3 +160,30 @@ async def send_spam_report(client, channel_id, user, type):
     for number in list:
         member = get.member_by_id(server, number)
         await client.send_message(member, content)
+
+async def init_antispam_status(server):
+    global status
+    file_path = "SETTINGS/" + server.id + "/antispam_status.txt"
+    drop_path = "/Gear_Two/antispam_status.txt"
+
+    try:
+        use.drop_down(drop_path,file_path)
+    except:
+        print("No file uploaded! (antispam_status.txt)")
+
+    with open(file_path) as f:
+        content = f.readlines()
+        content = [x.strip() for x in content]
+        f.close()
+
+    status = int(content[0])
+
+def set_antispam_status(num, server):
+    file_path = "SETTINGS/" + server.id + "/antispam_status.txt"
+    drop_path = "/Gear_Two/antispam_status.txt"
+
+    f = open(file_path, "w")
+    f.write(str(num))
+    f.close()
+    use.drop_up(drop_path, file_path)
+

@@ -22,7 +22,6 @@ async def check_count(client, server, member):
 
         use.drop_down(path_drop,path_file)
 
-
         with open(path_file) as f:
             content = f.readlines()
             content = [x.strip() for x in content]

@@ -36,6 +36,9 @@ async def on_ready():
             print(n_server.name)
     if n_server == None:
         print("No matching server found!")
+
+    await anti_spam.init_antispam_status(n_server)
+
     await client.change_presence(game=Game(name="Ready to help"))
 
 
