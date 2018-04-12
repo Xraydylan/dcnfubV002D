@@ -45,6 +45,13 @@ async def dev_authorisation_type2(server, member):
                 return True
     return False
 
+def exist_all_folders(dbx, path):
+    res = dbx.files_list_folder(path)
+    count = 0
+    for file in res.entries:
+        count += 1
+    return count
+
 
 def drop_up(drop_path, file_path):
     dbx = dropbox.Dropbox(CONECT.DROP_TOKEN)
