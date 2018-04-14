@@ -16,7 +16,7 @@ send_channel = None
 
 first = 0
 send_status = 1
-send_time = (20, 10)
+send_time = (20, 00)
 
 async def ex(args, message, client, invoke, server):
     global status, send_channel, first
