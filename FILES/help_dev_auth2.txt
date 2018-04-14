@@ -1,0 +1,26 @@
+Here are all available commands for authorization type 2.
+
+**Help:**
+-dev help
+
+
+**Useless text commands:**
+-dev ping auth2
+Bot answers with "dev auth2 Pong!"
+
+
+**Antispam:**
+-dev antispam status
+Displays if spam detector is running or not.
+(Normally antispam should on)
+
+-dev antispam start
+Starts antispam.
+
+-dev antispam stop
+Stopps antispam.
+
+
+**Other:**
+-dev delete auth2
+This deletes your authorization type 2 status.

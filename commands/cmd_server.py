@@ -10,6 +10,11 @@ async def ex(args, message, client, invoke, server):
 
         elif args_out == "roles":
             await all_roles(client, message, server)
+
+        elif args_out == "member auth2":
+            await member_auth2(client, message, server)
+
+
         else:
             await use.error("The command is not valid.", message.channel, client)
     else:
@@ -27,3 +32,17 @@ async def all_roles(client, message, server):
         final = final + "~ " + i + "\n"
 
     await  client.send_message(message.channel, final)
+
+
+async def member_auth2(client, message, server):
+
+
+    auth2_member_ids = get.members_auth2(server)
+
+    insert_string = get.direct_namestring_by_idlist(server,auth2_member_ids, 2)
+
+
+    content = "Here are all members with authorisation type 2:\n%s" % insert_string
+
+    await  client.send_message(message.channel, content)
+

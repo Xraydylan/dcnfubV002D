@@ -31,6 +31,10 @@ Displays how many members the server currently has.
 -server roles
 Displays all roles (alphabetically).
 
+-server member auth2
+Displays all members with authorization type 2.
+(These members have special tasks. They get informed when spam is detected)
+
 
 
 If you have any questions about the bot or any suggestions, please contact the Bot Master (%s).

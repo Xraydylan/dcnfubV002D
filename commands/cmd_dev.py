@@ -38,6 +38,8 @@ async def ex(args, message, client, invoke, server):
                 await anti_spam.stop_anti_spam(client, server, message.channel)
             elif args_out == "delete auth2":
                 await delete_auth2(client, server, message.channel, message.author)
+            elif args_out == "help":
+                await dev_help_auth2(client, server, message)
 
             # Only Authorisations type 1
             if await use.dev_authorisation_type1(server, get.member_by_message(server, message)):
@@ -139,7 +141,18 @@ async def delete_auth2(client, server, channel, user):
 
         use.drop_up(drop_path, file_path)
         await client.send_message(channel, "Authorisation off %s deleted!" % user.mention)
-
-
     else:
         await client.send_message(channel, "You do not have auth2.")
+
+
+async def dev_help_auth2(client, server, message):
+    c_titel = "Dev Commands for auth2"
+    content = ""
+    f = "FILES/" + "help_dev_auth2.txt"
+    if path.isfile(f):
+        with open(f) as f:
+            contentpre = f.read()
+            content = contentpre
+    else:
+        await use.error("Something went wrong!", message.channel, client)
+    await client.send_message(message.author, embed=discord.Embed(color=discord.Color.green(), title=c_titel, description=content))
