@@ -16,7 +16,7 @@ send_channel = None
 
 first = 0
 send_status = 1
-send_time = (20, 00)
+send_time = (20, 10)
 
 async def ex(args, message, client, invoke, server):
     global status, send_channel, first
@@ -231,7 +231,7 @@ def check_for_time(send_time):
 
     cur_time = time_create(int(ti[0])+2, int(ti[1]))
 
-    window_send = time_create(send_time[0],send_time[1]+1)
+    window_send = time_create(send_time[0],send_time[1]+3)
 
     if comp_time_greater(cur_time, send_time) and comp_time_greater(window_send, cur_time):
         print("Check")
