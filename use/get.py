@@ -3,6 +3,7 @@ from discord import Game, Embed
 import dropbox
 import CONECT
 from use import use
+from os import path
 
 def member_by_role(server, role):
     for n in server.members:
@@ -80,3 +81,13 @@ def direct_namestring_by_idlist(server, id_list, type = 0):
     string = namestring_by_memberlist(member_list, type)
 
     return string
+
+def txt_content_as_string(path_txt):
+
+    if path.isfile(path_txt):
+        with open(path_txt) as f:
+            contentpre = f.read()
+
+        return contentpre
+
+    return ""

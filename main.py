@@ -53,7 +53,6 @@ def Gear_Two():
         if anti_spam.status == 1:
             if message.server != None:
                 await anti_spam.new_message(client, message, n_server)
-                #if message.author == client.user
 
         if message.content.startswith(STATICS.PREFIX):
             invoke = message.content[len(STATICS.PREFIX):].split(" ")[0]
@@ -72,6 +71,7 @@ def Gear_Two():
             with open(f) as f:
                 custome_welcome = f.read()
             await client.send_message(member, embed=Embed(color=discord.Color.orange(), description=custome_welcome))
+
         f = "FILES/" + "additional_join_info.txt"
         if path.isfile(f):
             with open(f) as f:

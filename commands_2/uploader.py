@@ -22,10 +22,14 @@ async def ex(args, message, client, invoke, server):
     global status, send_channel, first
     dbx = dropbox.Dropbox(CONECT.DROP_TOKEN)
 
-    if await use.dev_authorisation_type1(server, get.member_by_message(server, message)):
-        if use.exist_all_folders(dbx,"/Pictures") == 3:
-            if len(args) > 0:
-                args_out = args.__str__()[1:-1].replace("'", "").replace(",", "")
+    if len(args) > 0:
+        args_out = args.__str__()[1:-1].replace("'", "").replace(",", "")
+
+        if args_out == "info":
+            await uploader_info(client, server, message)
+
+        if await use.dev_authorisation_type1(server, get.member_by_message(server, message)):
+            if use.exist_all_folders(dbx,"/Pictures") == 3:
                 if args_out == "ping up":
                     await client.send_message(message.channel, "Up Pong!")
                 elif args_out == "reset info":
@@ -83,8 +87,8 @@ async def ex(args, message, client, invoke, server):
                     first = 1
                     await client.send_message(message.channel, "Activated first message!")
 
-        else:
-            await client.send_message(message.channel, "There is a storage problem. Folders are missing!")
+            else:
+                await client.send_message(message.channel, "There is a storage problem. Folders are missing!")
 
 
 
@@ -297,8 +301,6 @@ async def re_status(client, main_loop, server):
         threading.Thread(name='sender_loop', target=sender_loop, args=(client, main_loop)).start()
 
 
-
-
 def error_process(error):
 
     path_file = "data/temp/error.txt"
@@ -314,3 +316,23 @@ def error_process(error):
     use.drop_up(path_drop, path_file)
 
     os.remove(path_file)
+
+
+async def uploader_info(client, server, message):
+    global send_channel,send_time
+    info_channel = message.author
+    if message.channel.id == send_channel.id:
+        info_channel = send_channel
+    c_titel = "Saucy Bot - Saucy Info Sheet"
+
+    minute = str(send_time[1])
+    if len(minute) == 1:
+        minute = "0" + minute
+
+    time_str = "%s:%s" % (str(send_time[0]), minute)
+
+    bmaster = get.member_by_role(server, discord.utils.get(server.roles, name="Bot Master"))
+
+    content = get.txt_content_as_string("data/temp/uploader_info.txt") % (time_str, bmaster.mention)
+
+    await client.send_message(info_channel, embed=discord.Embed(color=discord.Color.green(), title=c_titel, description=content))

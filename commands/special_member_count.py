@@ -16,8 +16,6 @@ async def check_count(client, server, member):
         f = open(path_file, "w")
         f.write("0")
         f.close()
-
-
     try:
 
         use.drop_down(path_drop,path_file)
@@ -30,7 +28,7 @@ async def check_count(client, server, member):
 
     except:
         print("upload reach")
-        await update_reach(0, path_file, path_drop)
+        await update_reach(reach, path_file, path_drop)
 
     if count == 100 and reach == 0:
         reach = 1
