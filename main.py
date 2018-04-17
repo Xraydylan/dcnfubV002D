@@ -3,7 +3,7 @@ from discord import Game, Embed
 from os import path
 import CONECT
 from commands import cmd_ping, cmd_hello, cmd_autorole, cmd_NSFWauthorise, cmd_to_role, cmd_help, cmd_server, cmd_dev, anti_spam, special_member_count
-from commands_2 import uploader
+from commands_2 import uploader,give
 import STATICS
 from use import use,get
 import asyncio
@@ -29,6 +29,8 @@ def Gear_Two():
         "dev": cmd_dev
 
     }
+
+    uploader_commands = ["uploader", "give"]
 
     @client.event
     async def on_ready():
@@ -60,7 +62,7 @@ def Gear_Two():
             if commands.__contains__(invoke):
                 await commands.get(invoke).ex(args, message, client, invoke, n_server)
 
-            elif invoke != "new" and invoke != "uploader":
+            elif invoke != "new" and not invoke in uploader_commands:
                 await use.error(("The command `%s` is not valid!" % invoke), message.channel, client)
 
     @client.event
@@ -97,6 +99,7 @@ def Picture_Bot():
     commands_2 = {
 
         "uploader": uploader,
+        "give": give,
     }
 
     @client_2.event

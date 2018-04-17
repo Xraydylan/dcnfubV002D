@@ -1,0 +1,8 @@
+These are some extra commands to use for the Saucy Bot.
+Write them directly to the bot or in the NSFW chat.
+
+-uploader info
+Displays the info sheet of the Saucy Bot.
+
+-give me juice
+Sends an extra image in the NSFW chat. This command can be used once per day and only once all 3 days by the same user.

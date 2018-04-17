@@ -323,7 +323,7 @@ async def uploader_info(client, server, message):
     info_channel = message.author
     if message.channel.id == send_channel.id:
         info_channel = send_channel
-        
+
     c_titel = "Saucy Bot - Saucy Info Sheet"
 
     minute = str(send_time[1])
