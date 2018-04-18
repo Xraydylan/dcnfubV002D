@@ -15,7 +15,7 @@ from datetime import datetime as dt
 
 send_channel = None
 
-
+delta_add = datetime.timedelta(days=0)
 
 async def ex(args, message, client, invoke, server):
     global send_channel
@@ -40,14 +40,12 @@ async def ex(args, message, client, invoke, server):
 
 
 async def give_juice(client, server, channel, message):
-    global send_channel
+    global send_channel, delta_add
 
     tday = dt.utcnow().date()
+
     ti = str(dt.utcnow()).split(" ")[1].split(":")[0:2]
-
     cur_time = time_create(int(ti[0]) + 2, int(ti[1]))
-
-
 
     user = message.author
 
@@ -69,8 +67,9 @@ async def give_juice(client, server, channel, message):
         content = [x.strip() for x in content]
         f.close()
     if content[0] != "0":
+        delta_add = datetime.timedelta(days=0)
         if check_for_new_day(content[0], tday, cur_time, 0):
-            if check_player_can(content,user, tday, cur_time):
+            if check_player_can(content, user, tday, cur_time):
                 await uploader.send(client, send_channel)
                 #print ("Would send!!!!!!!")
                 update_give_info(user, tday, path_file, path_drop)
@@ -89,16 +88,18 @@ async def give_juice(client, server, channel, message):
     #print("Done")
 
 def check_for_new_day(date_string, tday, cur_time, days):
+    global delta_add
     date_list = date_string.split("-")
     date = datetime.date(int(date_list[0]), int(date_list[1]), int(date_list[2]))
 
     delta = tday-date
 
-    if  delta.days < days:
+    if delta.days < days:
         return False
 
     if delta.days == days:
-        if cur_time[0] <= 3:
+        if cur_time[0] <= 2:
+            delta_add = datetime.timedelta(days=1)
             return True
         else:
             return False
@@ -121,15 +122,15 @@ def check_player_can(content, user, tday, cur_time):
 
 
 def update_give_info(user, tday, path_file, path_drop):
-
+    global delta_add
     f = open(path_file, "r")
     lines = f.readlines()
     f.close()
 
     lines = lines[1:]
 
-    date_line = str(tday) + "\n"
-    user_line = str(user.id) + " " + str(tday)+ "\n"
+    date_line = str(tday + delta_add) + "\n"
+    user_line = str(user.id) + " " + str(tday + delta_add)+ "\n"
 
     f = open(path_file, "w")
     f.write(date_line)
