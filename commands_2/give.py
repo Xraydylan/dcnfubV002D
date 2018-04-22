@@ -80,7 +80,7 @@ async def give_juice(client, server, channel, message):
 
         else:
             #Send "You have to wait till the next day..."
-            await use.error("You have to wait till the next day...", message.channel, client)
+            await use.error("Juice was already given today. \nYou have to wait till the next day...", message.channel, client)
 
     else:
         await uploader.send(client, send_channel)

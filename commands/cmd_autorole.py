@@ -17,7 +17,6 @@ def saveFile(id, server):
         os.makedirs("SETTINGS/" + server.id)
     with open("SETTINGS/" + server.id + "/autorole", "w") as f:
         f.write(id)
-        f.close()
 
 
 async def ex(args, message, client, invoke, server):
