@@ -76,7 +76,8 @@ async def give_juice(client, server, channel, message):
 
             else:
                 #Send "You can not request more than one picture within 3 days..."
-                await use.error("You can not request more than one picture within 3 days...", message.channel, client)
+                till = get_till(content[0], tday, cur_time, 3)
+                await use.error(("You can not request more than one picture within 3 days...\nYou have to wait %s." % till), message.channel, client)
 
         else:
             #Send "You have to wait till the next day..."
@@ -153,8 +154,23 @@ def time_create(hours, min):
 
     return (hours,min)
 
+def get_till(date_string, tday, cur_time, days):
 
 
+    date_list = date_string.split("-")
+    date = datetime.date(int(date_list[0]), int(date_list[1]), int(date_list[2]))
 
+    delta = tday - date
 
+    add = 0
 
+    if cur_time[0] <= 2:
+        add = 1
+
+    till_day = days - (delta.days + add)
+
+    if till_day == 0:
+        string = "till tomorrow"
+    else:
+        string = "%s days" % till_day
+    return string
