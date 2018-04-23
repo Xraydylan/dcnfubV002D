@@ -2,7 +2,7 @@ import discord
 from discord import Game, Embed
 from os import path
 import CONECT
-from commands import cmd_ping, cmd_hello, cmd_autorole, cmd_NSFWauthorise, cmd_to_role, cmd_help, cmd_server, cmd_dev, anti_spam, special_member_count
+from commands import cmd_ping, cmd_hello, cmd_autorole, cmd_NSFWauthorise, cmd_to_role, cmd_help, cmd_server, cmd_dev, anti_spam, special_member_count, cmd_com_own, cmd_get_com_own
 from commands_2 import uploader,give
 import STATICS
 from use import use,get
@@ -26,7 +26,9 @@ def Gear_Two():
         "to": cmd_to_role,
         "help": cmd_help,
         "server": cmd_server,
-        "dev": cmd_dev
+        "dev": cmd_dev,
+        #"own":cmd_com_own,
+        #"_-":cmd_get_com_own
 
     }
 
@@ -46,6 +48,8 @@ def Gear_Two():
 
         await anti_spam.init_antispam_status(n_server)
 
+        cmd_com_own.download_custom()
+
         await client.change_presence(game=Game(name="Ready to help"))
 
 
@@ -59,6 +63,8 @@ def Gear_Two():
         if message.content.startswith(STATICS.PREFIX):
             invoke = message.content[len(STATICS.PREFIX):].split(" ")[0]
             args = message.content.split(" ")[1:]
+            if invoke == "im":
+                invoke = "Im"
             if commands.__contains__(invoke):
                 await commands.get(invoke).ex(args, message, client, invoke, n_server)
 
