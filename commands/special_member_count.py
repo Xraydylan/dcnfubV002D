@@ -6,7 +6,7 @@ reach = 0
 
 async def check_count(client, server, member):
     global reach
-    count = server.member_count
+    count = server.member_count - 3
     channel = client.get_channel("405502332902703106")
 
     path_file = "SETTINGS/" + server.id + "/reach.txt"
