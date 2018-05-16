@@ -6,7 +6,7 @@ async def ex(args, message, client, invoke, server):
     if len(args) > 0:
         args_out = args.__str__()[1:-1].replace("'", "").replace(",", "")
         if args_out == "member count":
-            await  client.send_message(message.channel, "The server has currently %s members." % server.member_count)
+            await  client.send_message(message.channel, "The server has currently %s members." % (server.member_count-3))
 
         elif args_out == "roles":
             await all_roles(client, message, server)
