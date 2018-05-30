@@ -5,6 +5,7 @@ from os import path
 import CONECT
 import dropbox
 from dropbox.files import WriteMode
+from use import get
 
 async def error(content, channel, client):
     await client.send_message(channel, embed=Embed(color=discord.Color.red(), description=content))
@@ -44,6 +45,19 @@ async def dev_authorisation_type2(server, member):
             if (x.id in content) and (member.id in content):
                 return True
     return False
+
+async def send_to_authorisation_type1(server, client, text):
+    memberlist = []
+    if path.isfile("SETTINGS/" + server.id + "/permission_type1.txt"):
+        with open("SETTINGS/" + server.id + "/permission_type1.txt") as f:
+            content = f.readlines()
+            content = [x.strip() for x in content]
+            f.close()
+        for x in content:
+            memberlist.append(get.member_by_role(server,discord.utils.get(server.roles, name=str(x))))
+        for x in memberlist:
+            await client.send_message(x, text)
+
 
 def exist_all_folders(dbx, path):
     res = dbx.files_list_folder(path)

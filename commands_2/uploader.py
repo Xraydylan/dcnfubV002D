@@ -128,11 +128,22 @@ async def reset_info(dbx,client,channel):
 
 async def send(client,channel):
     global first
+
+    c_server = client.get_server(CONECT.SERVER_ID)
     dbx = dropbox.Dropbox(CONECT.DROP_TOKEN)
     res = dbx.files_list_folder("/Pictures/main")
     file_list = []
     for file in res.entries:
         file_list.append(file.name)
+
+    if len(file_list) == 49:
+        text = "Warning!\nPictures reservoir below 50!!!"
+        use.send_to_authorisation_type1(c_server,client,text)
+
+    elif len(file_list) == 19:
+        text = "Warning!\nPictures reservoir below 20!!!"
+        use.send_to_authorisation_type1(c_server,client,text)
+
 
     if len(file_list) > 0:
         send_name = random.choice(file_list)
