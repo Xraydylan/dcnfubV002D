@@ -32,7 +32,7 @@ def Gear_Two():
 
     }
 
-    uploader_commands = ["uploader", "give"]
+    uploader_commands = ["uploader", "give", "refueling"]
 
     @client.event
     async def on_ready():

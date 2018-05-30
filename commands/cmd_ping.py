@@ -1,7 +1,5 @@
 import discord
 
-from use import use
-
 async def ex(args, message, client, invoke, server):
     #args_out = ""
     #if len(args) > 0:

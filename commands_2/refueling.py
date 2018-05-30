@@ -5,10 +5,10 @@ import os
 
 
 async def ex(args, message, client, invoke, server):
-    if await use.dev_authorisation_type1(server, message.author):
+    if await use.dev_authorisation_type1(server, get.member_by_message(server, message)):
         if len(args) > 0:
             args_out = args.__str__()[1:-1].replace("'", "").replace(",", "")
-            if args_out == "complete":
+            if args_out == "completed":
                 await refuel(client, message.channel)
     else:
         await use.error("You don´t have the right permission to say this.", message.channel, client)
