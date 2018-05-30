@@ -3,7 +3,7 @@ from discord import Game, Embed
 from os import path
 import CONECT
 from commands import cmd_ping, cmd_hello, cmd_autorole, cmd_NSFWauthorise, cmd_to_role, cmd_help, cmd_server, cmd_dev, anti_spam, special_member_count, cmd_com_own, cmd_get_com_own
-from commands_2 import uploader,give
+from commands_2 import uploader,give,refueling
 import STATICS
 from use import use,get
 import asyncio
@@ -106,6 +106,7 @@ def Picture_Bot():
 
         "uploader": uploader,
         "give": give,
+        "refueling": refueling,
     }
 
     @client_2.event
