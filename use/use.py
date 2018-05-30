@@ -56,8 +56,10 @@ async def send_to_authorisation_type1(server, client, text):
         for x in content:
             memberlist.append(get.member_by_role(server,discord.utils.get(server.roles, name=str(x))))
         for x in memberlist:
-            await client.send_message(x, text)
-
+            try:
+                await client.send_message(x, text)
+            except:
+                pass
 
 def exist_all_folders(dbx, path):
     res = dbx.files_list_folder(path)
