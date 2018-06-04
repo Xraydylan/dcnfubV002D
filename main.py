@@ -84,7 +84,7 @@ def Gear_Two():
         if path.isfile(f):
             with open(f) as f:
                 custome_welcome_pre = f.read()
-                custome_welcome = custome_welcome_pre % n_server.member_count
+                custome_welcome = custome_welcome_pre % (n_server.member_count-3)
             await client.send_message(member, embed=Embed(color=discord.Color.blue(), description=custome_welcome))
 
         role = cmd_autorole.get(member.server)
